@@ -1,0 +1,9 @@
+- name: Ajustar uso de swap
+  hosts: all
+  become: true
+  tasks:
+    - name: Ajustar swappiness
+      sysctl:
+        name: vm.swappiness
+        value: 10
+        state: present
