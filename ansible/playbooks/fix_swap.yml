@@ -1,9 +1,11 @@
-- name: Ajustar uso de swap
-  hosts: all
+- name: Ajustar swappiness
+  hosts: localhost
   become: true
+  user: root
   tasks:
-    - name: Ajustar swappiness
+    - name: Definir vm.swappiness para 10
       sysctl:
         name: vm.swappiness
         value: 10
         state: present
+        reload: yes
