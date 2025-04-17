@@ -1,0 +1,9 @@
+- name: Aumentar limite de arquivos abertos
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Ajustar file-max
+      sysctl:
+        name: fs.file-max
+        value: 100000
+        state: present

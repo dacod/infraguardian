@@ -1,0 +1,9 @@
+- name: Ativar tcp_syncookies
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Ativar proteção SYN flood
+      sysctl:
+        name: net.ipv4.tcp_syncookies
+        value: 1
+        state: present

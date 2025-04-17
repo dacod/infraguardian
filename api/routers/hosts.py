@@ -23,7 +23,11 @@ class FixRequest(BaseModel):
     recommended: int
     fix: str
 
-
+fix_map = {
+    "fix_swap": "fix_swap.yml",
+    "fix_file_limits": "fix_file_limits.yml",
+    "fix_syncookies": "fix_syncookies.yml"
+}
 
 fake_db = []
 
@@ -38,13 +42,17 @@ def list_metrics():
 
 @router.post("/fix")
 def apply_fix(data: FixRequest):
-    if data.fix == "fix_swap":
+    playbook = fix_map.get(data.fix)
+    if playbook:
         try:
             result = subprocess.run([
-                "ansible-playbook", "ansible/playbooks/fix_swap.yml", "-i", "localhost,"
+                "ansible-playbook", f"ansible/playbooks/{playbook}", "-i", "localhost,"
             ], capture_output=True, text=True)
             print(f"[API] Correção aplicada: {data.issue}")
             return {"status": "fix applied", "output": result.stdout}
         except Exception as e:
             return {"status": "error", "message": str(e)}
+    elif data.fix == "alert_disk_full":
+        print(f"[ALERTA] Uso de disco alto detectado no host {data.hostname}")
+        return {"status": "alert only"}
     return {"status": "unknown fix"}
