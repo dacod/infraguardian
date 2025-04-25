@@ -8,14 +8,14 @@ API_URL = "http://localhost:8000/hosts/metrics"
 
 def run_all_detectors():
     detectors = [
-        # swappiness.check_swappiness,
+        swappiness.check_swappiness,
         sys_health.check_open_file_limits,
         sys_health.check_disk_usage,
         sys_health.check_sysctl_net_ipv4_tcp_syncookies
     ]
     for detector in detectors:
         issue = detector()
-        if issue:
+        if issue and issue.get("fix"):
             fix_payload = {
                 "hostname": socket.gethostname(),
                 "timestamp": datetime.now().isoformat(),
@@ -25,7 +25,7 @@ def run_all_detectors():
                 "fix": issue["fix"]
             }
             requests.post("http://localhost:8000/hosts/fix", json=fix_payload)
-
+  
 
 
 def collect_metrics():
@@ -41,21 +41,10 @@ def collect_metrics():
         "timestamp": timestamp
     }
 
-    requests.post(API_URL, json=payload)
 
-    # Verifica problemas
-    issue = swappiness.check_swappiness()
-    if issue:
-        fix_payload = {
-            "hostname": hostname,
-            "timestamp": timestamp,
-            "issue": issue["issue"],
-            "current_value": issue["current_value"],
-            "recommended": issue["recommended"],
-            "fix": issue["fix"]
-        }
-        requests.post("http://localhost:8000/hosts/fix", json=fix_payload)
-        run_all_detectors()
+    requests.post(API_URL, json=payload)
+    
+    run_all_detectors()
 
 
 if __name__ == "__main__":

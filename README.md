@@ -132,3 +132,7 @@ python agent/main.py
 
 Você verá as métricas sendo enviadas e armazenadas em memória no backend.
 
+
+PS.: 
+- aconselhavel o uso de chave ssh sem autenticação apra laboratorios
+- hosts ficam no inventário hosts.ini

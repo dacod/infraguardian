@@ -1,0 +1,10 @@
+---
+- name: Alerta de uso de disco elevado
+  hosts: all
+  become: yes
+  tasks:
+    - name: Registrar alerta de uso de disco elevado
+      ansible.builtin.shell: |
+        logger -t disk_alert "ALERTA: Uso de disco acima de 85% detectado pelo sistema de monitoramento."
+      args:
+        executable: /bin/bash
