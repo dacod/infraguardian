@@ -1,13 +1,13 @@
 # InfraGuardian
 
-🚀 Produto: InfraGuardian (nome provisório)
+## 🚀 Produto: InfraGuardian (nome provisório)
 Diagnóstico inteligente e correção automatizada de performance e segurança para servidores Linux, containers e infraestrutura cloud/híbrida.
 
-🎯 Proposta de Valor
+## 🎯 Proposta de Valor
 Automatize a detecção e resolução de problemas de performance e segurança em servidores, containers e serviços com um agente leve e um painel central.
 Tenha uma equipe sênior 24/7 monitorando, diagnosticando e corrigindo automaticamente falhas críticas.
 
-🧩 Funcionalidades principais (MVP)
+## 🧩 Funcionalidades principais (MVP)
 🔍 Módulo de Diagnóstico:
 Coleta de métricas de CPU, RAM, I/O, disco, rede, containers
 
@@ -17,7 +17,7 @@ Detecção de erros em logs (syslog, dmesg, docker logs etc.)
 
 Verificação de configurações incorretas ou perigosas (ex: swap mal configurado, permissões abertas, etc.)
 
-🛠️ Módulo de Correção Automatizada:
+## 🛠️ Módulo de Correção Automatizada:
 Scripts Ansible para corrigir problemas comuns
 
 Integração com Vault para correção segura de configurações sensíveis
@@ -26,12 +26,12 @@ Correções propostas vs. Correções aplicadas (com modo “manual”, “semi-
 
 Playbooks prontos para performance tuning (ex: PostgreSQL, NGINX, Nomad, Docker)
 
-🧠 Assistente de Performance (opcional no roadmap):
+## 🧠 Assistente de Performance (opcional no roadmap):
 Chatbot (Typebot + Langflow) que responde “como resolver X” com base nos dados reais da sua infra
 
 Sugestões de melhorias contínuas com histórico e comparativos
 
-🛡️ Diferenciais
+## 🛡️ Diferenciais
 Baseado na experiência real de um sysadmin + DevOps sênior
 
 Capacidade de rodar on-premises ou em edge (ex: Raspberry Pi monitorando localmente)
@@ -42,7 +42,7 @@ Pronto para ambientes híbridos, containers e legados
 
 Reduz necessidade de mão de obra altamente técnica em suporte de N2/N3
 
-🔧 Tecnologias recomendadas para MVP
+## 🔧 Tecnologias recomendadas para MVP
 Backend: Python (API, diagnósticos), Ansible, Shell
 
 Frontend: Next.js ou React + Tailwind (dashboard)
@@ -54,7 +54,7 @@ Banco: SQLite (MVP) ou PostgreSQL (scalável)
 IA: Regras heurísticas + integração opcional com modelos locais (Ollama) para sugestões
 
 
-🚧 Roadmap de Evolução
+## 🚧 Roadmap de Evolução
 MVP: Diagnóstico + Correções básicas automatizadas com Ansible
 
 Integração com Vault e Nomad para ajustes seguros
@@ -66,8 +66,9 @@ Exportação de relatórios de auditoria e compliance
 Integração com Git para versionar correções e histórico de alterações na infra
 
 
-🏗️ Estrutura de Pastas
+## 🏗️ Estrutura de Pastas
 
+```
 infraguardian/
 │
 ├── agent/                   # Agente leve que roda no host monitorado
@@ -102,14 +103,10 @@ infraguardian/
 ├── docker-compose.yml       # Para rodar local (API + UI)
 ├── requirements.txt         # Dependências do backend
 └── README.md
+```
 
 
-
-
-
-
-
-✅ Como rodar localmente
+## ✅ Como rodar localmente
 Crie um ambiente virtual e instale dependências:
 
 python -m venv venv
@@ -120,14 +117,14 @@ Sair: deactivate
 
 
 Suba o backend:
-'''
+```
 uvicorn api.main:app --reload
-'''
+```
 
 Em outro terminal, execute o agente:
-'''
+```
 python agent/main.py
-'''
+```
 
 
 Você verá as métricas sendo enviadas e armazenadas em memória no backend.
